@@ -12,9 +12,9 @@ public class Creatura {
     public Creatura(String nome, String tipo) {
         this.nome = nome;
         this.tipo = tipo;
-        this.puntiVita = 100;
-        this.puntiFame = 100;
-        this.puntiFelicita = 100;
+        this.puntiVita = 80;
+        this.puntiFame = 80;
+        this.puntiFelicita = 80;
         this.soldiTam = 1000;
         this.sonoVivo = true;
     }
@@ -76,12 +76,6 @@ public class Creatura {
     }
 
     public void daiCibo() {
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
-            sonoVivo = false;
-            checkStato();
-            return;
-        }
-
         System.out.println("Scrivere 1 per Torta, al costo di 200 Tam\nSeleziona 2 per Biscotto, al costo di 100 Tam\nSeleziona 3 per Caramella, al costo di 50 Tam");
 
         switch (creaturaIn.nextInt()) {
@@ -103,16 +97,15 @@ public class Creatura {
         }
 
         if (puntiFame > 100) puntiFame = 100;
-        checkStato();
-    }
-
-    public void faiBagnetto() {
         if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
             sonoVivo = false;
             checkStato();
             return;
         }
+        checkStato();
+    }
 
+    public void faiBagnetto() {
         System.out.println("Scrivere 1 per Bagno lungo, al costo di 150 Tam\nSeleziona 2 per Bagno corto, al costo di 70 Tam\nSeleziona 3 per Bide', al costo di 40 Tam");
 
         switch (creaturaIn.nextInt()) {
@@ -134,16 +127,15 @@ public class Creatura {
         }
 
         if (puntiVita > 100) puntiVita = 100;
-        checkStato();
-    }
-
-    public void daiGioco() {
         if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
             sonoVivo = false;
             checkStato();
             return;
         }
+        checkStato();
+    }
 
+    public void daiGioco() {
         System.out.println("Scrivere 1 per giocare al PC, al costo di 200 Tam\nSeleziona 2 per a Calcio, al costo di 100 Tam\nSeleziona 3 per Disegnare, al costo di 50 Tam");
 
         switch (creaturaIn.nextInt()) {
@@ -165,33 +157,32 @@ public class Creatura {
         }
 
         if (puntiFelicita > 100) puntiFelicita = 100;
+        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
+            sonoVivo = false;
+            checkStato();
+            return;
+        }
         checkStato();
     }
 
 
 
     public void daiMedicina() {
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
-            sonoVivo = false;
-            checkStato();
-            return;
-        }
         System.out.println("Vuoi curare " + nome + " per 200 Tam? S/N");
         if (creaturaIn.nextLine().equals("s") || creaturaIn.nextLine().equals("S")) {
             puntiVita += 50;
             soldiTam -= 200;
         }
         if (puntiVita > 100) puntiVita = 100;
-        checkStato();
-    }
-
-    public void faiLavoro(){
         if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
             sonoVivo = false;
             checkStato();
             return;
         }
+        checkStato();
+    }
 
+    public void faiLavoro(){
         System.out.println("Scrivere 1 per Consegna lunga\nSeleziona 2 per Consegna corta\nSeleziona 3 per Consegna normale");
 
         switch (creaturaIn.nextInt()) {
@@ -218,6 +209,11 @@ public class Creatura {
         if (puntiVita > 100) puntiVita = 100;
         if (puntiFame > 100) puntiFame = 100;
         if (puntiFelicita > 100) puntiFelicita = 100;
+        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
+            sonoVivo = false;
+            checkStato();
+            return;
+        }
         checkStato();
     }
 
@@ -229,9 +225,9 @@ public class Creatura {
         System.out.println("Punti Fame: " + puntiFame);
         System.out.println("Ammontare Tam: " + soldiTam);
         if (sonoVivo) {
-            System.out.println("La creatura e viva");
+            System.out.println(nome + " e vivo/a");
         } else {
-            System.out.println("La creatura e morta");
+            System.out.println(nome + " e morto/a");
             return;
         }
     }
