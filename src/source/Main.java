@@ -5,11 +5,11 @@
  * se il return code è:
  * 0 il programma per altre cause
  * 1 il programma è finito in checkStato()
- * 2 il programma è finito in menu()
+ * 2 il programma è finito in menu() per ,orte della creatura
  * 3 l'utente è uscito dal menu() e ha finito il programma
  * +++++
- */
-package company;
+*/
+package source;
 
 import java.util.*;
 import java.lang.*;
@@ -45,6 +45,10 @@ public class Main {
         }
 
         if (miaCreatura.isSonoVivo()) menu();// se la creatura è viva continua il programma
+        else {
+            System.out.println(miaCreatura.getNome() + " e morto/a");
+            System.exit(2);
+        }
     }
 
     public static String scegliNome() {// è la prima funzione eseguita quindi da il benvenuto e chiede il nome della creatura
