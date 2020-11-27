@@ -3,7 +3,7 @@ package company;
 import java.util.*;
 
 public class Creatura {
-    // attributi
+    // attributi, si spiegano da soli
     private String nome, tipo;
     private int puntiVita, puntiFame, puntiFelicita, soldiTam;
     private boolean sonoVivo;
@@ -13,9 +13,9 @@ public class Creatura {
     public Creatura(String nome, String tipo) {// costruttore
         this.nome = nome;
         this.tipo = tipo;
-        this.puntiVita = 80;
-        this.puntiFame = 80;
-        this.puntiFelicita = 80;
+        this.puntiVita = 100;
+        this.puntiFame = 100;
+        this.puntiFelicita = 100;
         this.soldiTam = 1000;
         this.sonoVivo = true;
     }
@@ -81,6 +81,8 @@ public class Creatura {
     //fine getter/setter
 
     public void daiCibo() {
+        // chiede all'utente cosa vuola far mangiare alla creatura tra tre opzioni una migliore ma più costosa dell'altra,
+        // controlla che la creatura non sia morta, controlla che i punti vita siano sotto il 100
         System.out.println("Scrivere 1 per Torta, al costo di 200 Tam\nSeleziona 2 per Biscotto, al costo di 100 Tam\nSeleziona 3 per Caramella, al costo di 50 Tam");
 
         switch (creaturaIn.nextInt()) {
@@ -100,17 +102,10 @@ public class Creatura {
                 soldiTam -= 50;
             }
         }
-
-        if (puntiFame > 100) puntiFame = 100;
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
-            sonoVivo = false;
-            checkStato();
-            return;
-        }
-        checkStato();
+        controllore();
     }
 
-    public void faiBagnetto() {
+    public void faiBagnetto() {// stessa cosa del cibo ma col bagno
         System.out.println("Scrivere 1 per Bagno lungo, al costo di 150 Tam\nSeleziona 2 per Bagno corto, al costo di 70 Tam\nSeleziona 3 per Bide', al costo di 40 Tam");
 
         switch (creaturaIn.nextInt()) {
@@ -130,17 +125,10 @@ public class Creatura {
                 soldiTam -= 40;
             }
         }
-
-        if (puntiVita > 100) puntiVita = 100;
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
-            sonoVivo = false;
-            checkStato();
-            return;
-        }
-        checkStato();
+        controllore();
     }
 
-    public void daiGioco() {
+    public void daiGioco() {// stessa cosa del cibo ma col gioco
         System.out.println("Scrivere 1 per giocare al PC, al costo di 200 Tam\nSeleziona 2 per a Calcio, al costo di 100 Tam\nSeleziona 3 per Disegnare, al costo di 50 Tam");
 
         switch (creaturaIn.nextInt()) {
@@ -160,34 +148,23 @@ public class Creatura {
                 soldiTam -= 50;
             }
         }
-
-        if (puntiFelicita > 100) puntiFelicita = 100;
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
-            sonoVivo = false;
-            checkStato();
-            return;
-        }
-        checkStato();
+        controllore();
     }
 
 
 
-    public void daiMedicina() {
+    public void daiMedicina() {// chiede all'utente se vuole medicare la creatura, controlla che la creatura non sia morta, controlla che i punti vita siano sotto il 100
         System.out.println("Vuoi curare " + nome + " per 200 Tam? S/N");
-        if (creaturaIn.nextLine().equals("s") || creaturaIn.nextLine().equals("S")) {
+        String temp = creaturaIn.next();
+        if (temp.equals("s") || temp.equals("S")) {
             puntiVita += 50;
             soldiTam -= 200;
         }
-        if (puntiVita > 100) puntiVita = 100;
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
-            sonoVivo = false;
-            checkStato();
-            return;
-        }
-        checkStato();
+        controllore();
     }
 
     public void faiLavoro(){
+        //chiede all'utente che lavoro vuole fare per guadagnare
         System.out.println("Scrivere 1 per Consegna lunga\nSeleziona 2 per Consegna corta\nSeleziona 3 per Consegna normale");
 
         switch (creaturaIn.nextInt()) {
@@ -210,19 +187,11 @@ public class Creatura {
                 puntiFelicita -= 10;
             }
         }
-
-        if (puntiVita > 100) puntiVita = 100;
-        if (puntiFame > 100) puntiFame = 100;
-        if (puntiFelicita > 100) puntiFelicita = 100;
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
-            sonoVivo = false;
-            checkStato();
-            return;
-        }
-        checkStato();
+        controllore();
     }
 
     public void checkStato() {// stampa lo stato della creatura e controlla se è in vita
+        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) sonoVivo = false;
         System.out.println("Nome: " + nome);
         System.out.println("Tipo: " + tipo);
         System.out.println("Punti Vita: " + puntiVita);
@@ -233,7 +202,18 @@ public class Creatura {
             System.out.println(nome + " e vivo/a");
         } else {
             System.out.println(nome + " e morto/a");
-            return;
+            System.exit(0);
+        }
+    }
+    public void controllore() {
+        // controlla che gli attributi non siano superiori a 100, se lo sono li riporta a 100
+        if (puntiVita > 100) puntiVita = 100;
+        if (puntiFame > 100) puntiFame = 100;
+        if (puntiFelicita > 100) puntiFelicita = 100;
+        //controlla che la creatura non sia morta, se lo è mette sonoVivo a false
+        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
+            sonoVivo = false;
+            checkStato();
         }
     }
 }
