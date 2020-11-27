@@ -1,4 +1,4 @@
-/*
+/* +++++
  * Autore: Iuri Antico
  *
  * informazioni addizionali:
