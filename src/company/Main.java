@@ -5,17 +5,19 @@ import java.lang.*;
 
 public class Main {
     static Scanner in = new Scanner(System.in);
-    static Creatura miaCreatura = new Creatura(scegliNome(), scegliTipo());
+    static Creatura miaCreatura = new Creatura(scegliNome(), scegliTipo());// inizializza l'oggetto creatura con nome e tipo scelti dall'utente
 
     public static void main(String[] args) {
         menu();
     }
 
     public static void menu() {
-        if (!miaCreatura.isSonoVivo()){
+        if (!miaCreatura.isSonoVivo()){// se la creatura è morta finisce il programma
             System.out.println(miaCreatura.getNome() + " e morto/a");
             return;
         }
+        // presenta all'utente un menù con selezione a input di numeri, se l'utente inserisce 0 esce,
+        // se l'utente inserisce un valore non valido esegue una ricorsione
         System.out.println("\ncosa vuoi fare a " + miaCreatura.getNome() + "\n1 per lavorare\n2 per mangiare\n3 per lavare\n4 per giocare\n5 per medicare\n0 per uscire");
         switch (in.nextInt()) {
             case 0 -> {
@@ -29,16 +31,16 @@ public class Main {
             case 5 -> miaCreatura.daiMedicina();
             default -> menu();
         }
-        if (miaCreatura.isSonoVivo()) menu();
+        if (miaCreatura.isSonoVivo()) menu();// se la creatura è viva continua il programma
     }
 
-    public static String scegliNome() {
+    public static String scegliNome() {// è la prima funzione eseguita quindi da il benvenuto e chiede il nome della creatura
         System.out.println("\nBenvenuto nel gioco del Tamagotchi\n");
         System.out.println("Scegli il nome della tua creatura");
         return in.nextLine();
     }
 
-    public static String scegliTipo() {
+    public static String scegliTipo() { // sceglie il tipo di creature chiedendo all'utente il numero corrisponedente
         System.out.println("Scegli il tipo di Creatura\n1 per Drago\n2 per Alieno\n3 per Dinosauro");
         int tipo = in.nextInt();
         switch (tipo) {

@@ -3,13 +3,14 @@ package company;
 import java.util.*;
 
 public class Creatura {
+    // attributi
     private String nome, tipo;
     private int puntiVita, puntiFame, puntiFelicita, soldiTam;
     private boolean sonoVivo;
 
     Scanner creaturaIn = new Scanner(System.in);
 
-    public Creatura(String nome, String tipo) {
+    public Creatura(String nome, String tipo) {// costruttore
         this.nome = nome;
         this.tipo = tipo;
         this.puntiVita = 80;
@@ -18,6 +19,8 @@ public class Creatura {
         this.soldiTam = 1000;
         this.sonoVivo = true;
     }
+
+    //vari getter/setter
 
     public String getNome() {
         return nome;
@@ -74,6 +77,8 @@ public class Creatura {
     public void setSonoVivo(boolean sonoVivo) {
         this.sonoVivo = sonoVivo;
     }
+
+    //fine getter/setter
 
     public void daiCibo() {
         System.out.println("Scrivere 1 per Torta, al costo di 200 Tam\nSeleziona 2 per Biscotto, al costo di 100 Tam\nSeleziona 3 per Caramella, al costo di 50 Tam");
@@ -217,7 +222,7 @@ public class Creatura {
         checkStato();
     }
 
-    public void checkStato() {
+    public void checkStato() {// stampa lo stato della creatura e controlla se è in vita
         System.out.println("Nome: " + nome);
         System.out.println("Tipo: " + tipo);
         System.out.println("Punti Vita: " + puntiVita);
