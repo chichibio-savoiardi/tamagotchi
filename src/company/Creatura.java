@@ -210,7 +210,7 @@ public class Creatura {
         if (puntiVita > 100) puntiVita = 100;
         if (puntiFame > 100) puntiFame = 100;
         if (puntiFelicita > 100) puntiFelicita = 100;
-        //controlla che la creatura non sia morta, se lo è mette sonoVivo a false
+        //controlla che la creatura non sia morta, se lo è mette sonoVivo a false e chiama checkStato() che fara finire il programma dicendo all'utente le brutte notizie
         if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
             sonoVivo = false;
             checkStato();
