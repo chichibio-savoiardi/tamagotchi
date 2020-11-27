@@ -1,10 +1,13 @@
 /* +++++
  * Autore: Iuri Antico
- *
+ * -----
  * informazioni addizionali:
- * se il return code è 1 il programma è finito in checkStato()
- * se il return code è 2 il programma è finito in menu()
- * se il return code è 3 l'utente è uscito dal menu() e ha finito il programma
+ * se il return code è:
+ * 0 il programma per altre cause
+ * 1 il programma è finito in checkStato()
+ * 2 il programma è finito in menu()
+ * 3 l'utente è uscito dal menu() e ha finito il programma
+ * +++++
  */
 package company;
 

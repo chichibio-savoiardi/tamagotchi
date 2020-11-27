@@ -164,7 +164,7 @@ public class Creatura {
     }
 
     public void faiLavoro(){
-        //chiede all'utente che lavoro vuole fare per guadagnare
+        //chiede all'utente che lavoro vuole fare per guadagnare Tam
         System.out.println("Scrivere 1 per Consegna lunga\nSeleziona 2 per Consegna corta\nSeleziona 3 per Consegna normale");
 
         switch (creaturaIn.nextInt()) {
@@ -191,14 +191,14 @@ public class Creatura {
     }
 
     public void checkStato() {// stampa lo stato della creatura e controlla se è in vita
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) sonoVivo = false;
+        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) sonoVivo = false;// controlla se la creatura è morta
         System.out.println("Nome: " + nome);
         System.out.println("Tipo: " + tipo);
         System.out.println("Punti Vita: " + puntiVita);
         System.out.println("Punti Felicita: " + puntiFelicita);
         System.out.println("Punti Fame: " + puntiFame);
         System.out.println("Ammontare Tam: " + soldiTam);
-        if (sonoVivo) {
+        if (sonoVivo) {// decide se la creatura è morta e nel caso lo sia finisce il programma
             System.out.println(nome + " e vivo/a");
         } else {
             System.out.println(nome + " e morto/a");
