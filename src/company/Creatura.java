@@ -202,7 +202,7 @@ public class Creatura {
             System.out.println(nome + " e vivo/a");
         } else {
             System.out.println(nome + " e morto/a");
-            System.exit(0);
+            System.exit(1);
         }
     }
     public void controllore() {

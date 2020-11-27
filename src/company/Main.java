@@ -1,3 +1,10 @@
+/*
+* Autore: Iuri Antico
+*
+* informazioni addizionali:
+* se il return code è 2 il programma è finito in menu()
+* se il return code è 1 il programma è finito in checkStato()
+*/
 package company;
 
 import java.util.*;
@@ -14,7 +21,7 @@ public class Main {
     public static void menu() {
         if (!miaCreatura.isSonoVivo()){// se la creatura è morta finisce il programma
             System.out.println(miaCreatura.getNome() + " e morto/a");
-            return;
+            System.exit(2);
         }
         // presenta all'utente un menù con selezione a input di numeri, se l'utente inserisce 0 esce,
         // se l'utente inserisce un valore non valido esegue una ricorsione
