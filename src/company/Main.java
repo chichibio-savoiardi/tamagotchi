@@ -65,9 +65,12 @@ public class Main {
         boolean isNotDone = false;
         do {// se isNotDone è true fa scegliere di nuovo perché l'utente ha sbagliato
             isNotDone = false;
-            System.out.println("Scegli il tipo di Creatura\n1 per Drago\n2 per Alieno\n3 per Dinosauro");
+            System.out.println("Scegli il tipo di Creatura\n1 per Drago\n2 per Alieno\n3 per Dinosauro\n0 per tornare indietro");
             int tipo = in.nextInt();
             switch (tipo) {
+                case 0 -> {
+                    return scegliTipo();
+                }
                 case 1 -> {
                     return tipiCreatura[0];
                 }
