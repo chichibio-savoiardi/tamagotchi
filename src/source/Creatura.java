@@ -102,7 +102,7 @@ public class Creatura {
                 soldiTam -= 50;
             }
         }
-        controllore();
+        checkStato();
     }
 
     public void faiBagnetto() {// stessa cosa del cibo ma col bagno
@@ -125,7 +125,7 @@ public class Creatura {
                 soldiTam -= 40;
             }
         }
-        controllore();
+        checkStato();
     }
 
     public void daiGioco() {// stessa cosa del cibo ma col gioco
@@ -148,7 +148,7 @@ public class Creatura {
                 soldiTam -= 50;
             }
         }
-        controllore();
+        checkStato();
     }
 
 
@@ -160,7 +160,7 @@ public class Creatura {
             puntiVita += 50;
             soldiTam -= 200;
         }
-        controllore();
+        checkStato();
     }
 
     public void faiLavoro(){
@@ -187,33 +187,45 @@ public class Creatura {
                 puntiFelicita -= 10;
             }
         }
-        controllore();
+        checkStato();
     }
 
     public void checkStato() {// stampa lo stato della creatura e controlla se è in vita
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) sonoVivo = false;// controlla se la creatura è morta
+        controllore();// controlla se la creatura è morta, e che gli attributi siano sotto il 100
         System.out.println("Nome: " + nome);
         System.out.println("Tipo: " + tipo);
         System.out.println("Punti Vita: " + puntiVita);
         System.out.println("Punti Felicita: " + puntiFelicita);
         System.out.println("Punti Fame: " + puntiFame);
         System.out.println("Ammontare Tam: " + soldiTam);
-        if (sonoVivo) {// decide se la creatura è morta e nel caso lo sia finisce il programma
-            System.out.println(nome + " e vivo/a");
-        } else {
-            System.out.println(nome + " e morto/a");
-            System.exit(1);
-        }
+        isVivo(1, 1);
     }
     public void controllore() {
         // controlla che gli attributi non siano superiori a 100, se lo sono li riporta a 100
         if (puntiVita > 100) puntiVita = 100;
         if (puntiFame > 100) puntiFame = 100;
         if (puntiFelicita > 100) puntiFelicita = 100;
-        //controlla che la creatura non sia morta, se lo è mette sonoVivo a false e chiama checkStato() che fara finire il programma dicendo all'utente le brutte notizie
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) {
-            sonoVivo = false;
-            checkStato();
+        //controlla che la creatura non sia morta, se lo è mette sonoVivo a false
+        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) sonoVivo = false;
+    }
+
+    public void isVivo(int doPrint, int exitCode) {
+        switch (doPrint) {// 0 non stampa il fatto che la creatura è viva, 1 stampa il fatto che la creatura sia viva
+            case 0 -> {
+                if (!sonoVivo) {// controlla se sonoVivo è false, e nel caso lo sia finisce il programma
+                    System.out.println(nome + " e morto/a");
+                    System.exit(exitCode);
+                }
+            }
+            case 1 -> {
+                if (sonoVivo) {// controlla se sonoVivo è true, e nel caso non lo sia finisce il programma
+                    System.out.println(nome + " e vivo/a");
+                } else {
+                    System.out.println(nome + " e morto/a");
+                    System.exit(exitCode);
+                }
+            }
+            default -> throw new IllegalStateException("In Creatura.isVivo().doPrint, Unexpected value: " + doPrint);
         }
     }
 }

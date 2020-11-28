@@ -2,11 +2,11 @@
  * Autore: Iuri Antico
  * -----
  * informazioni addizionali:
- * se il return code è:
- * 0 il programma per altre cause
- * 1 il programma è finito in checkStato()
- * 2 il programma è finito in menu() per ,orte della creatura
- * 3 l'utente è uscito dal menu() e ha finito il programma
+ * se il exit code è:
+ * 0 l'utente è uscito dal menu() e ha finito il programma, o altre cause
+ * 1 il programma è finito in isVivo()
+ * 2 il programma è finito all'inizio di menu() per morte della creatura
+ * 20 il programma è finito alla fine di menu() per morte della creatura
  * +++++
 */
 package source;
@@ -23,10 +23,7 @@ public class Main {
     }
 
     public static void menu() {
-        if (!miaCreatura.isSonoVivo()) {// se la creatura è morta finisce il programma
-            System.out.println(miaCreatura.getNome() + " e morto/a");
-            System.exit(2);
-        }
+        miaCreatura.isVivo(0, 2);
         // presenta all'utente lo stato della creatura e un menù con selezione a input di numeri, se l'utente inserisce 0 esce,
         // se l'utente inserisce un valore non valido esegue una ricorsione
         miaCreatura.checkStato();
@@ -34,7 +31,7 @@ public class Main {
         switch (in.nextInt()) {
             case 0 -> {
                 System.out.println("sto uscendo");
-                System.exit(3);
+                System.exit(0);
             }
             case 1 -> miaCreatura.faiLavoro();
             case 2 -> miaCreatura.daiCibo();
@@ -44,11 +41,8 @@ public class Main {
             default -> menu();
         }
 
-        if (miaCreatura.isSonoVivo()) menu();// se la creatura è viva continua il programma
-        else {
-            System.out.println(miaCreatura.getNome() + " e morto/a");
-            System.exit(2);
-        }
+        miaCreatura.isVivo(0, 20);
+        menu();
     }
 
     public static String scegliNome() {// è la prima funzione eseguita quindi da il benvenuto e chiede il nome della creatura
