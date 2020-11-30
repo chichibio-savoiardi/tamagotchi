@@ -2,6 +2,7 @@ package source;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.lang.*;
 
 public class Client {
     // attributi
