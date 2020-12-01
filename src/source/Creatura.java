@@ -5,7 +5,7 @@ import java.util.*;
 public class Creatura {
     // attributi, si spiegano da soli
     private String nome, tipo;
-    private int puntiVita, puntiFame, puntiFelicita, soldiTam;
+    private int puntiVita, puntiFame, puntiFelicita, soldiTam, maxPunti, minPunti;
     private boolean sonoVivo;
 
     Scanner creaturaIn = new Scanner(System.in);
@@ -13,9 +13,11 @@ public class Creatura {
     public Creatura(String nome, String tipo) {// costruttore
         this.nome = nome;
         this.tipo = tipo;
-        this.puntiVita = 100;
-        this.puntiFame = 100;
-        this.puntiFelicita = 100;
+        this.maxPunti = 100;
+        this.minPunti = 0;
+        this.puntiVita = maxPunti;
+        this.puntiFame = maxPunti;
+        this.puntiFelicita = maxPunti;
         this.soldiTam = 1000;
         this.sonoVivo = true;
     }
@@ -76,6 +78,14 @@ public class Creatura {
 
     public void setSonoVivo(boolean sonoVivo) {
         this.sonoVivo = sonoVivo;
+    }
+
+    public int getMaxPunti() {
+        return maxPunti;
+    }
+
+    public void setMaxPunti(int maxPunti) {
+        this.maxPunti = maxPunti;
     }
 
     //fine getter/setter
@@ -201,12 +211,12 @@ public class Creatura {
         isVivo(1, 1);
     }
     public void controllore() {
-        // controlla che gli attributi non siano superiori a 100, se lo sono li riporta a 100
-        if (puntiVita > 100) puntiVita = 100;
-        if (puntiFame > 100) puntiFame = 100;
-        if (puntiFelicita > 100) puntiFelicita = 100;
+        // controlla che gli attributi non siano superiori a maxPunti, se lo sono li riporta a maxPunti
+        if (puntiVita > maxPunti) puntiVita = maxPunti;
+        if (puntiFame > maxPunti) puntiFame = maxPunti;
+        if (puntiFelicita > maxPunti) puntiFelicita = maxPunti;
         //controlla che la creatura non sia morta, se lo è mette sonoVivo a false
-        if (puntiVita < 1 && puntiFame < 1 && puntiFelicita < 1) sonoVivo = false;
+        if (puntiVita <= minPunti && puntiFame <= minPunti && puntiFelicita <= minPunti) sonoVivo = false;
     }
 
     public void isVivo(int doPrint, int exitCode) {
