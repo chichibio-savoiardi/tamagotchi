@@ -2,22 +2,22 @@ package source;
 
 import java.util.Random;
 import java.util.Scanner;
-import java.lang.*;
 
 public class Client {
-    // attributi
-    private String[] tipiCreatura = new String[3];
-    private boolean isNotDone;
 
     Scanner clientIn = new Scanner(System.in);
+    // attributi
+    private final String[] tipiCreatura = {
+            "Drago",
+            "Alieno",
+            "Dinosauro"
+    };
+    private boolean isNotDone;
+
     Creatura miaCreatura = new Creatura(scegliNome(), scegliTipo());// inizializza l'oggetto creatura con nome e tipo scelti dall'utente
 
     public Client() {// costruttore
         isNotDone = false;
-        tipiCreatura[0] = "Drago";
-        tipiCreatura[1] = "Alieno";
-        tipiCreatura[2] = "Dinosauro";
-
     }
 
     public void menu() {
@@ -52,7 +52,8 @@ public class Client {
     public String scegliTipo() { // sceglie il tipo di creature o a random o chiedendo all'utente il numero corrisponedente
         System.out.println("vuoi scegliere la creatura? S/N?");
         String temp = clientIn.next();
-        if (!(temp.equals("s") || temp.equals("S"))) return tipiCreatura[randInt(0, 2)];// se l'utente mette qualsiasi cosa che non sia "s" o "S" sceglie a random la creatura
+        if (!(temp.equals("s") || temp.equals("S")))
+            return tipiCreatura[randInt(0, 2)];// se l'utente mette qualsiasi cosa che non sia "s" o "S" sceglie a random la creatura
         do {// se isNotDone è true fa scegliere di nuovo perché l'utente ha sbagliato
             isNotDone = false;
             System.out.println("Scegli il tipo di Creatura\n1 per Drago\n2 per Alieno\n3 per Dinosauro\n0 per tornare indietro");
