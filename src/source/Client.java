@@ -25,7 +25,14 @@ public class Client {
         // presenta all'utente lo stato della creatura e un menù con selezione a input di numeri, se l'utente inserisce 0 esce,
         // se l'utente inserisce un valore non valido esegue una ricorsione
         miaCreatura.checkStato();
-        System.out.println("\ncosa vuoi fare a " + miaCreatura.getNome() + "\n1 per lavorare\n2 per mangiare\n3 per lavare\n4 per giocare\n5 per medicare\n0 per uscire");
+        System.out.println(
+                "\ncosa vuoi fare a " + miaCreatura.getNome() +
+                "\n1 per lavorare" +
+                "\n2 per mangiare" +
+                "\n3 per lavare" +
+                "\n4 per giocare" +
+                "\n5 per medicare" +
+                "\n0 per uscire");
         switch (clientIn.nextInt()) {
             case 0 -> {
                 System.out.println("sto uscendo");
