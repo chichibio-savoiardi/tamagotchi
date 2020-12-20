@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Client {
 
-    Scanner clientIn = new Scanner(System.in);
+    private Scanner clientIn = new Scanner(System.in);
     // attributi
     private final String[] tipiCreatura = {
             "Drago",
@@ -31,7 +31,8 @@ public class Client {
                 "\n2 per mangiare" +
                 "\n3 per lavare" +
                 "\n4 per giocare" +
-                "\n5 per medicare" +
+                "\n5 per medicare/allenare" +
+                "\n6 per evolvere" +
                 "\n0 per uscire");
         switch (clientIn.nextInt()) {
             case 0 -> {
@@ -84,6 +85,24 @@ public class Client {
             }
         } while (isNotDone);
         return tipiCreatura[randInt(0, 2)];
+    }
+
+    public void evolvi() {
+        miaCreatura.controllore();
+        if (!(miaCreatura.getPuntiFame() == miaCreatura.getMaxPunti() && miaCreatura.getSoldiTam() > 1000)) {
+            System.out.println("Devi avere almeno 1000 Tam e punti vita massimi (" + miaCreatura.getMaxPunti() + ") per evolvere la Creatura");
+            return;
+        }
+        if (miaCreatura.getTipo().equals("Drago")) {
+            miaCreatura = new Drago(miaCreatura.getNome(), miaCreatura.getTipo() + " evoluto");
+        } else if (miaCreatura.getTipo().equals("Alieno")) {
+            miaCreatura = new Alieno(miaCreatura.getNome(), miaCreatura.getTipo() + " evoluto");
+        } else {
+            miaCreatura = new Dinosauro(miaCreatura.getNome(), miaCreatura.getTipo() + " evoluto");
+        }
+        miaCreatura.setMaxPunti(miaCreatura.getMaxPunti() + 100);
+        System.out.println(miaCreatura.getNome() + "si è evuluto!");
+        miaCreatura.checkStato();
     }
 
     public int randInt(int min, int max) {

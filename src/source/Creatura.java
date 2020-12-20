@@ -4,21 +4,21 @@ import java.util.*;
 
 public class Creatura {
     // attributi, si spiegano da soli
-    private String nome, tipo;
-    private int puntiVita, puntiFame, puntiFelicita, soldiTam, maxPunti, minPunti;
-    private boolean sonoVivo;
+    protected String nome, tipo;
+    protected int puntiVita, puntiFame, puntiFelicita, soldiTam, maxPunti, minPunti;
+    protected boolean sonoVivo;
 
-    Scanner creaturaIn = new Scanner(System.in);
+    protected Scanner creaturaIn = new Scanner(System.in);
 
     public Creatura(String nome, String tipo) {// costruttore
         this.nome = nome;
         this.tipo = tipo;
         this.maxPunti = 100;
         this.minPunti = 0;
-        this.puntiVita = maxPunti;
-        this.puntiFame = maxPunti;
-        this.puntiFelicita = maxPunti;
-        this.soldiTam = 1000;
+        this.puntiVita = maxPunti - 20;
+        this.puntiFame = maxPunti - 20;
+        this.puntiFelicita = maxPunti - 20;
+        this.soldiTam = 900;
         this.sonoVivo = true;
     }
 
@@ -97,7 +97,7 @@ public class Creatura {
 
         switch (creaturaIn.nextInt()) {
             case 1 -> {
-                puntiFame += 50;
+                puntiFame += 60;
                 puntiVita -= 30;
                 soldiTam -= 200;
             }
@@ -120,12 +120,12 @@ public class Creatura {
 
         switch (creaturaIn.nextInt()) {
             case 1 -> {
-                puntiVita += 40;
+                puntiVita += 50;
                 puntiFelicita -= 30;
                 soldiTam -= 150;
             }
             case 2 -> {
-                puntiVita += 20;
+                puntiVita += 30;
                 puntiFelicita -= 15;
                 soldiTam -= 70;
             }
@@ -143,17 +143,17 @@ public class Creatura {
 
         switch (creaturaIn.nextInt()) {
             case 1 -> {
-                puntiFelicita += 50;
+                puntiFelicita += 60;
                 puntiVita -= 30;
                 soldiTam -= 200;
             }
             case 2 -> {
-                puntiFelicita += 30;
+                puntiFelicita += 40;
                 puntiVita -= 20;
                 soldiTam -= 100;
             }
             case 3 -> {
-                puntiFelicita += 20;
+                puntiFelicita += 30;
                 puntiVita -= 10;
                 soldiTam -= 50;
             }
@@ -167,7 +167,7 @@ public class Creatura {
         System.out.println("Vuoi curare " + nome + " per 200 Tam? S/N");
         String temp = creaturaIn.next();
         if (temp.equals("s") || temp.equals("S")) {
-            puntiVita += 50;
+            puntiVita += 60;
             soldiTam -= 200;
         }
         checkStato();
@@ -179,13 +179,13 @@ public class Creatura {
 
         switch (creaturaIn.nextInt()) {
             case 1 -> {
-                soldiTam += 400;
+                soldiTam += 500;
                 puntiVita -= 40;
                 puntiFame -= 40;
                 puntiFelicita -= 40;
             }
             case 2 -> {
-                soldiTam += 200;
+                soldiTam += 300;
                 puntiVita -= 20;
                 puntiFame -= 20;
                 puntiFelicita -= 20;
@@ -215,6 +215,10 @@ public class Creatura {
         if (puntiVita > maxPunti) puntiVita = maxPunti;
         if (puntiFame > maxPunti) puntiFame = maxPunti;
         if (puntiFelicita > maxPunti) puntiFelicita = maxPunti;
+        if (soldiTam < 1) {
+            System.out.println("Hai finito i soldi");
+            System.exit(3);
+        }
         //controlla che la creatura non sia morta, se lo è mette sonoVivo a false
         if (puntiVita <= minPunti && puntiFame <= minPunti && puntiFelicita <= minPunti) sonoVivo = false;
     }
